@@ -4,7 +4,9 @@ import { StyleSheet, FlatList, Text, View } from 'react-native';
 import MapView from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import { Avatar, Button, Card, Title, Paragraph, Searchbar } from 'react-native-paper';
-import * as Permissions from 'expo';
+// import * as Permissions from 'expo';
+import * as Permissions from 'expo-permissions';
+
 
 export default class Map extends Component {
 

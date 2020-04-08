@@ -67,7 +67,7 @@ export default class Login extends Component {
       {this.state.signedIn && 
         <View><Text>This user is logged in</Text>
         <Text>{this.state.name}</Text>
-        <Image style={styles.image} source={this.state.photoUrl}/></View>}
+        <Image style={styles.image} source={{uri:this.state.photoUrl}}/></View>}
       <Button
           title="Go to Map"
           onPress={() => this.props.navigation.navigate('Map')}
