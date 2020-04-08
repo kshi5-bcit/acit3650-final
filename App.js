@@ -5,6 +5,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { Provider as PaperProvider } from 'react-native-paper';
 import Home from './view/Home';
 import Map from './view/Map';
+import Login from './view/Login';
 
 const RootStack = createStackNavigator(
   {
@@ -14,9 +15,12 @@ const RootStack = createStackNavigator(
     Map: {
       screen: Map,
     },
+    Login: {
+      screen: Login,
+    },
   },
   {
-    initalRouteName: 'Map',
+    initialRouteName: 'Login',
   }
 );
 

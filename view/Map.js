@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Text, View } from 'react-native';
+import { StyleSheet, FlatList, Text, View } from 'react-native';
 import MapView from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import { Avatar, Button, Card, Title, Paragraph, Searchbar } from 'react-native-paper';
@@ -12,9 +12,9 @@ export default class Map extends Component {
     super();
     this.state = {
       search:'',
-      results: []
-      position: 'N/A'
-      locationPermission: 'N/A'
+      results: [],
+      position: 'N/A',
+      locationPermission: 'N/A',
     }
   }
 
