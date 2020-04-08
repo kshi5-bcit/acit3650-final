@@ -44,12 +44,14 @@ export default class Login extends Component {
   signOut = async () => {
     console.log("signing out")
       /* Log-Out */
+      let accessToken = this.state.accessToken
       await Google.logOutAsync({ accessToken, ...config }).then(() => {
         this.setState({
           signedIn: false,
           name: "",
           email: "",
           photoUrl: "",
+          accessToken: "",
         })
       });
     
