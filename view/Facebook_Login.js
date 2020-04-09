@@ -35,8 +35,13 @@ export default class Login extends Component {
     	    // firebase.auth().signInWithCredential(credential).catch((error) => {
     	    //   // Handle Errors here.
     	    // });
-    	    const response = await fetch(`https://graph.facebook.com/me?access_token=${result.token}`);
-          Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
+    	    // const response = await fetch(`https://graph.facebook.com/me?access_token=${result.token}`);
+         //  Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
+          const response = await fetch(`https://graph.facebook.com/me?fields=id,name,first_name,last_name,middle_name,picture,email&access_token=${result.token}`);
+			console.log("response ");
+			console.log(`${(await response.json())}`);
+			console.log(response);
+			console.dir(response);
     	  } else {
         console.log("cancelled")
       }
