@@ -80,11 +80,11 @@ export default class Login extends Component {
               {text: 'Cancel, keep me logged in', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
               {text: 'Sign me out!', onPress: this.signOut},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
         }} /> 
 
-        || <Button title="SignIn"onPress={this.signIn} />
+        || <Button title="Sign In"onPress={this.signIn} />
       }
       
       </View>
