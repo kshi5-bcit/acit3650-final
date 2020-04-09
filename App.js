@@ -10,10 +10,7 @@ import Facebook_Login from './view/Facebook_Login';
 
 const RootStack = createStackNavigator(
   {
-    Home: {
-      screen: Home,
-    },
-    Map: {
+    NotUber: {
       screen: Map,
     },
     Login: {
