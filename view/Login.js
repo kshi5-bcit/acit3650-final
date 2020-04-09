@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import { StyleSheet, Text, View, Image, Button, Alert } from 'react-native';
 import * as Google from "expo-google-app-auth";
 
 const config = {
-        // Kevin's android and ios client id's
-        androidClientId: "328874978995-2lapjgofl201415ft9uri774rh98vedd.apps.googleusercontent.com",
-        iosClientId: "328874978995-9973qhi84grtd824po6uc0o99ke4lh6k.apps.googleusercontent.com",
-        scopes: ["profile", "email"],
-      }
+  // Kevin's android and ios client id's
+  androidClientId: "328874978995-2lapjgofl201415ft9uri774rh98vedd.apps.googleusercontent.com",
+  iosClientId: "328874978995-9973qhi84grtd824po6uc0o99ke4lh6k.apps.googleusercontent.com",
+  scopes: ["profile", "email"],
+}
 
 export default class Login extends Component {
 
@@ -42,7 +42,8 @@ export default class Login extends Component {
     }
   }
   signOut = async () => {
-    console.log("signing out")
+    if (this.state.signedIn) {
+      console.log("signing out")
       /* Log-Out */
       let accessToken = this.state.accessToken
       await Google.logOutAsync({ accessToken, ...config }).then(() => {
@@ -54,7 +55,7 @@ export default class Login extends Component {
           accessToken: "",
         })
       });
-    
+    }
   }
 
   render() {
@@ -67,15 +68,24 @@ export default class Login extends Component {
       {this.state.signedIn && 
         <View><Text>This user is logged in</Text>
         <Text>{this.state.name}</Text>
-        <Image style={styles.image} source={{uri:this.state.photoUrl}}/></View>}
-      <Button
-          title="Go to Map"
-          onPress={() => this.props.navigation.navigate('Map')}
-      />
-     {this.state.signedIn &&
-      <Button title="Sign Out"onPress={this.signOut} /> || 
-      <Button title="SignIn"onPress={this.signIn} />
-    }
+        <Image style={styles.image} source={{uri:this.state.photoUrl}}/></View>
+      }
+      <Button title="Go to Map"onPress={() => this.props.navigation.navigate('Map')} />
+      {this.state.signedIn 
+        && <Button title="Sign Out"onPress={()=>{
+          Alert.alert(
+            'Sign Out',
+            'Are you sure you want to log out?',
+            [
+              {text: 'Cancel, keep me logged in', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+              {text: 'Sign me out!', onPress: this.signOut},
+            ],
+            { cancelable: false }
+          )
+        }} /> 
+
+        || <Button title="SignIn"onPress={this.signIn} />
+      }
       
       </View>
     )
