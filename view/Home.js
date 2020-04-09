@@ -27,6 +27,10 @@ export default class Home extends Component {
           title="Go to Login"
           onPress={() => this.props.navigation.navigate('Login')}
       />
+      <Button
+          title="Go to Facebook Login"
+          onPress={() => this.props.navigation.navigate('Facebook_Login')}
+      />
 
       </View>
     )

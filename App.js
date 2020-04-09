@@ -6,6 +6,7 @@ import { Provider as PaperProvider } from 'react-native-paper';
 import Home from './view/Home';
 import Map from './view/Map';
 import Login from './view/Login';
+import Facebook_Login from './view/Facebook_Login';
 
 const RootStack = createStackNavigator(
   {
@@ -17,6 +18,9 @@ const RootStack = createStackNavigator(
     },
     Login: {
       screen: Login,
+    },
+    Facebook_Login: {
+      screen: Facebook_Login,
     },
   },
   {

@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, Text, View, Image, Button, Alert } from 'react-native';
-import * as Google from "expo-google-app-auth";
+import * as Facebook from 'expo-facebook';
 
-
-const google_config = {
-  // Kevin's android and ios client id's
-  androidClientId: "328874978995-2lapjgofl201415ft9uri774rh98vedd.apps.googleusercontent.com",
-  iosClientId: "328874978995-9973qhi84grtd824po6uc0o99ke4lh6k.apps.googleusercontent.com",
-  scopes: ["profile", "email"],
-}
 
 export default class Login extends Component {
 
@@ -25,17 +18,26 @@ export default class Login extends Component {
   }
   signIn = async () => {
     try {
-      const result = await Google.logInAsync( google_config )
-      if (result.type === "success") {
-        console.log(result.user);
-        this.setState({
-          signedIn: true,
-          name: result.user.name,
-          photoUrl: result.user.photoUrl,
-          email: result.user.email,
-          accessToken: result.accessToken,
-        })
-      } else {
+    	await Facebook.initializeAsync(
+    	     '1146369092376154',
+    	  );
+
+    	  const result = await Facebook.logInWithReadPermissionsAsync(
+    	    { permissions: ['public_profile'] }
+    	  );
+
+    	  if (result.type === 'success') {
+    	  	console.log(result)
+    	    // Build Firebase credential with the Facebook access token.
+    	    // const credential = firebase.auth.FacebookAuthProvider.credential(token);
+
+    	    // Sign in with credential from the Facebook user.
+    	    // firebase.auth().signInWithCredential(credential).catch((error) => {
+    	    //   // Handle Errors here.
+    	    // });
+    	    const response = await fetch(`https://graph.facebook.com/me?access_token=${result.token}`);
+          Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
+    	  } else {
         console.log("cancelled")
       }
     } catch ( e ) {
@@ -85,7 +87,7 @@ export default class Login extends Component {
           )
         }} /> 
 
-        || <Button title="Sign In with Google"onPress={this.signIn} />
+        || <Button title="Sign In with Facebook"onPress={this.signIn} />
       }
       
       </View>
