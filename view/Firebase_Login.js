@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { StyleSheet, TextInput, Text, View, Image, Button, Alert } from 'react-native';
 import firebase from 'react-native-firebase';
 
-export default class Register extends Component {
+export default class Firebase_Login extends Component {
 
 	constructor(props) {
 		super(props);
@@ -12,30 +12,34 @@ export default class Register extends Component {
 			email: "",
 			password: "",
 			verify_password: "",
-			err_message: "",
+			errMessage: "",
 
 		}
 	}
 
-	componentDidMount() {
-	  firebase.auth().onAuthStateChanged(user => {
-	    this.props.navigation.navigate(user ? 'Home' : 'SignUp')
-	  })
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      this.props.navigation.navigate(user ? 'Home' : 'SignUp')
+    })
+}
 
-	  signUp = () => {
-	    firebase
-	      .auth() .createUserWithEmailAndPassword(this.state.email, this.state.password)
-	      .then(() => this.props.navigation.navigate('NotUber'))
-	      .catch(error => this.setState({ errorMessage: error.message }))
-	  }
+ handleLogin = () => {
+   firebase
+     .auth() .signInWithEmailAndPassword(email, password)
+     .then(() => this.props.navigation.navigate('NotUber'))
+     .catch(error => this.setState({ errMessage: error.message }))
+ }
 
-	render() {
-		const { navigation }=this.props;
-
-		return (
-			<View style={styles.container}>
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={{color:'#e93766', fontSize: 40}}>Login</Text>
+        {this.state.errorMessage &&
+          <Text style={{ color: 'red' }}>
+            {this.state.errorMessage}
+          </Text>}
 			<Text style={styles.registerTitle}>
-				Register for an account
+				Log into your account
 			</Text>
 			<TextInput
 			style={styles.textInput}
@@ -54,25 +58,14 @@ export default class Register extends Component {
 			onChangeText={password => this.setState({ password })}
 			value={this.state.password}
 			/>
-			<TextInput
-			style={styles.textInput}
-			secureTextEntry
-			placeholder='Verify Password'
-			secureTextEntry={true}
-			autoCapitalize='none'
-			onChangeText={verify_password => this.setState({ verify_password })}
-			value={this.state.verify_password}
-			/>
-			{
-				true ?
-				<Text>is true</Text> :
-				<Text>is false</Text>
-			}
-        	<View><Button title="Sign Up" color="#e93766" onPress ​={this.handleSignUp}/></View>
-
-			</View>
-			)}
-	}
+        <Button title="Login" color="#e93766" onPress ​={this.handleLogin} />
+        <View>
+        <Text> Don't have an account? <Text onPress ​={() => this.props.navigation.navigate('SignUp')} style={{color:'#e93766', fontSize: 18}}> Sign Up </Text></Text>
+        </View>
+      </View>
+    )
+  }
+}
 
 	const styles=StyleSheet.create({
 		registerTitle: {

@@ -7,7 +7,7 @@ import Home from './view/Home';
 import Map from './view/Map';
 import Login from './view/Login';
 import Facebook_Login from './view/Facebook_Login';
-import Register from './view/Register';
+// import Register from './view/Register';
 
 const RootStack = createStackNavigator(
   {
@@ -21,7 +21,7 @@ const RootStack = createStackNavigator(
       screen: Facebook_Login,
     },
     Register: {
-      screen: Register,
+      screen: Login,
     },
   },
   {

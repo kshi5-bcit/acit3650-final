@@ -55,6 +55,7 @@ export default class Login extends Component {
           photoUrl: "",
           accessToken: "",
         })
+        
       });
     }
   }
@@ -64,7 +65,7 @@ export default class Login extends Component {
 
     return (
       <View style={styles.container}>
-      <Button title="Go to Register" onPress={() => this.props.navigation.navigate('Register')} />
+
       {this.state.signedIn && 
         <View><Text>This user is logged in</Text>
         <Text>{this.state.name}</Text>
@@ -88,7 +89,9 @@ export default class Login extends Component {
         || <View><Button title="Sign In with Google"onPress={this.signIn} />
         <Button title="Sign Up"onPress={() => {
           Alert.alert("Sign up pressed")
-        }} /></View>
+        }} />
+        <Button title="Go to Register" onPress={() => this.props.navigation.navigate('Register')} />
+        </View>
       }
       
       </View>
