@@ -64,16 +64,16 @@ export default class Login extends Component {
 
     return (
       <View style={styles.container}>
-      <Text>Test</Text>
-      {this.state.signedIn || <Text>Not logged in</Text>}
+      <Button title="Go to Register" onPress={() => this.props.navigation.navigate('Register')} />
       {this.state.signedIn && 
         <View><Text>This user is logged in</Text>
         <Text>{this.state.name}</Text>
         <Image style={styles.image} source={{uri:this.state.photoUrl}}/></View>
       }
-      <Button title="Go to Map"onPress={() => this.props.navigation.navigate('Map')} />
+      
       {this.state.signedIn 
-        && <Button title="Sign Out"onPress={()=>{
+        && <View><Button title="Go to Map" onPress={() => this.props.navigation.navigate('NotUber')} />
+        <Button title="Sign Out" onPress={()=>{
           Alert.alert(
             'Sign Out',
             'Are you sure you want to log out?',
@@ -83,9 +83,12 @@ export default class Login extends Component {
             ],
             { cancelable: true }
           )
-        }} /> 
+        }} /></View>
 
-        || <Button title="Sign In with Google"onPress={this.signIn} />
+        || <View><Button title="Sign In with Google"onPress={this.signIn} />
+        <Button title="Sign Up"onPress={() => {
+          Alert.alert("Sign up pressed")
+        }} /></View>
       }
       
       </View>

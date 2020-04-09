@@ -37,11 +37,14 @@ export default class Login extends Component {
     	    // });
     	    // const response = await fetch(`https://graph.facebook.com/me?access_token=${result.token}`);
          //  Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
-          const response = await fetch(`https://graph.facebook.com/me?fields=id,name,first_name,last_name,middle_name,picture,email&access_token=${result.token}`);
-			console.log("response ");
-			console.log(`${(await response.json())}`);
-			console.log(response);
-			console.dir(response);
+          await fetch(`https://graph.facebook.com/me?fields=id,namepicture,email&access_token=${result.token}`).then(
+          	response => {
+          		console.log("inside the Then")
+          		console.log(response)
+          		console.log(response.picture)
+          		console.log(response.json())
+          		console.dir(response)
+          	});
     	  } else {
         console.log("cancelled")
       }
